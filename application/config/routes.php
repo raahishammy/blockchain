@@ -54,3 +54,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'authenticate/index';
 $route['register'] = 'authenticate/register_view';
+$route['dashboard'] = 'authenticate/dashboard_view';

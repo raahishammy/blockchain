@@ -68,4 +68,15 @@ class User extends CI_Model{
         } 
         return false; 
     } 
+
+
+  public function processLogin($email=NULL,$password){
+      $this->db->select("*");
+      $whereCondition = $array = array('email' =>$email,'password'=>$password);
+      $this->db->where($whereCondition);
+      $this->db->from($this->table);
+      $query = $this->db->get();
+      return $query;
+ }
+
 }

@@ -19,15 +19,7 @@
         <link href="<?= base_url(); ?>assets/zicros/css/menu.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/login.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/responsive.css" rel="stylesheet" type="text/css" />
-
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
+          <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
 
     </head>
 
@@ -97,7 +89,7 @@
                                     <?php endif; ?>
                                     
                                     <?php $attributes = array('class' => 'form ajax form-horizontal', 'id' => 'login-form','method' => 'post'); ?>
-                                    <?php echo form_open('login', $attributes); ?>
+                                    <?php echo form_open('authenticate/login_post', $attributes); ?>
                                         <div class="form-group ">
                                             <div class="col-xs-12">
                                                 <input class="form-control" type="text" name="email" required="" placeholder="Email" value="<?php echo $email ?>" >
@@ -106,7 +98,7 @@
 
                                         <div class="form-group">
                                             <div class="col-xs-12">
-                                                <input class="form-control" type="password" name="password" required="" placeholder="Enter Password">
+                                                <input class="form-control" type="password" name="password" required="" placeholder="Enter Password" value="">
                                             </div>
                                         </div>
 
@@ -131,7 +123,7 @@
 
                                         <div class="form-group account-btn text-center m-t-10">
                                             <div class="col-xs-12">
-                                                <input type="submit" class="btn w-md btn-bordered btn-danger waves-effect waves-light" name="loginSubmit" value="Log In">
+                                                <button type="submit" class="btn w-md btn-bordered btn-danger waves-effect waves-light" name="loginSubmit" value="Log In">Log In</button>
                                             </div>
                                         </div>
 

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Authenticate extends CI_Controller {
@@ -26,9 +27,33 @@ class Authenticate extends CI_Controller {
       } 
 	}
 
-    public function login_post(){ 
-       print_r($this->input->post());
-       die();
+    public function login_post()
+    { 
+      $email = trim($this->input->post('email'));
+      $password = md5($this->input->post('password'));
+      $query = $this->user->processLogin($email,$password);
+       $this->form_validation->set_rules('email', 'Email', 'required|valid_email'); 
+       $this->form_validation->set_rules('password', 'password', 'required'); 
+     
+      $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+      $this->form_validation->set_message('required', 'Enter %s');
+     if($this->form_validation->run() == true){ 
+            if($query){
+            $query = $query->result();
+            $user = array(
+             'id' => $query[0]->id,
+             'name' => $query[0]->name,
+             'email' => $query[0]->email,
+             'contact' => $query[0]->contact,
+             'country_code' => $query[0]->country_code,
+             'role' => $query[0]->role
+            );
+            $this->session->set_userdata($user);
+             redirect('dashboard'); 
+         }
+      }else{
+            $this->load->view('users/login');
+     }
     } 
 
       public function logout(){ 
@@ -99,5 +124,17 @@ class Authenticate extends CI_Controller {
             return TRUE; 
         } 
     } 
+
+    public function dashboard_view()
+    {
+        if($this->isUserLoggedIn){ 
+              $this->load->view('users/dashboard');
+         }else{ 
+          $this->load->view('users/login');
+           if($this->input->post('loginSubmit')){ 
+                $this->login_post();
+            }
+      } 
+   }
 
 }
