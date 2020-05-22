@@ -20,45 +20,15 @@ class Authenticate extends CI_Controller {
             $this->load->view('users/dashboard');
         }else{ 
           $this->load->view('users/login');
+           if($this->input->post('loginSubmit')){ 
+                $this->login_post();
+            }
       } 
 	}
 
     public function login_post(){ 
-        $data = array(); 
-        if($this->session->userdata('success_msg')){ 
-            $data['success_msg'] = $this->session->userdata('success_msg'); 
-            $this->session->unset_userdata('success_msg'); 
-        } 
-        if($this->session->userdata('error_msg')){ 
-            $data['error_msg'] = $this->session->userdata('error_msg'); 
-            $this->session->unset_userdata('error_msg'); 
-        } 
-        if($this->input->post('loginSubmit')){ 
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email'); 
-            $this->form_validation->set_rules('password', 'password', 'required'); 
-             
-            if($this->form_validation->run() == true){ 
-                $con = array( 
-                    'returnType' => 'single', 
-                    'conditions' => array( 
-                        'email'=> $this->input->post('email'), 
-                        'password' => md5($this->input->post('password')), 
-                        'status' => 1 
-                    ) 
-                ); 
-                $checkLogin = $this->user->getRows($con); 
-                if($checkLogin){ 
-                    $this->session->set_userdata('isUserLoggedIn', TRUE); 
-                    $this->session->set_userdata('userId', $checkLogin['id']); 
-                    redirect('users/dashboard/'); 
-                }else{ 
-                    $data['error_msg'] = 'Wrong email or password, please try again.'; 
-                } 
-            }else{ 
-                $data['error_msg'] = 'Please fill all the mandatory fields.'; 
-            } 
-        } 
-        $this->load->view('login', $data); 
+       print_r($this->input->post());
+       die();
     } 
 
       public function logout(){ 
@@ -72,8 +42,7 @@ class Authenticate extends CI_Controller {
     	if($this->isUserLoggedIn){ 
             $this->load->view('users/dashboard');
         }else{ 
-
-        	$this->load->view('users/register');
+             $this->load->view('users/register');
              if($this->input->post('signupSubmit')){ 
                 $this->register_post();
             }

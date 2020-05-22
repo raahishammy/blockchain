@@ -97,7 +97,7 @@
                                     <?php endif; ?>
                                     
                                     <?php $attributes = array('class' => 'form ajax form-horizontal', 'id' => 'login-form','method' => 'post'); ?>
-                                    <?php echo form_open('authenticate/login_post', $attributes); ?>
+                                    <?php echo form_open('login', $attributes); ?>
                                         <div class="form-group ">
                                             <div class="col-xs-12">
                                                 <input class="form-control" type="text" name="email" required="" placeholder="Email" value="<?php echo $email ?>" >
