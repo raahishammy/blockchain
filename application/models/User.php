@@ -70,7 +70,8 @@ class User extends CI_Model{
     } 
 
 
-  public function processLogin($email=NULL,$password){
+  public function processLogin($email=NULL,$password)
+  {
       $this->db->select("*");
       $whereCondition = $array = array('email' =>$email,'password'=>$password);
       $this->db->where($whereCondition);

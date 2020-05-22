@@ -18,9 +18,9 @@ class Authenticate extends CI_Controller {
 	
 	public function index(){
 	if($this->isUserLoggedIn){ 
-            $this->load->view('users/dashboard');
+            $this->load->view('admin/dashboard/index');
         }else{ 
-          $this->load->view('users/login');
+          $this->load->view('admin/login');
            if($this->input->post('loginSubmit')){ 
                 $this->login_post();
             }
@@ -48,11 +48,12 @@ class Authenticate extends CI_Controller {
              'country_code' => $query[0]->country_code,
              'role' => $query[0]->role
             );
+            $this->load->library('session');
             $this->session->set_userdata($user);
-             redirect('dashboard'); 
+             redirect('dashboard',$user); 
          }
       }else{
-            $this->load->view('users/login');
+            $this->load->view('admin/login');
      }
     } 
 
@@ -60,14 +61,14 @@ class Authenticate extends CI_Controller {
         $this->session->unset_userdata('isUserLoggedIn'); 
         $this->session->unset_userdata('userId'); 
         $this->session->sess_destroy(); 
-        redirect('users/login/'); 
+        redirect('login'); 
     } 
 
     public function register_view(){
     	if($this->isUserLoggedIn){ 
-            $this->load->view('users/dashboard');
+            $this->load->view('admin/dashboard/login');
         }else{ 
-             $this->load->view('users/register');
+             $this->load->view('admin/register');
              if($this->input->post('signupSubmit')){ 
                 $this->register_post();
             }
@@ -106,7 +107,7 @@ class Authenticate extends CI_Controller {
             } 
         } 
         $data['user'] = $userData; 
-        $this->load->view('users/register', $data); 
+        $this->load->view('admin/register', $data); 
     }
 
     public function email_check($str){ 
@@ -127,14 +128,8 @@ class Authenticate extends CI_Controller {
 
     public function dashboard_view()
     {
-        if($this->isUserLoggedIn){ 
-              $this->load->view('users/dashboard');
-         }else{ 
-          $this->load->view('users/login');
-           if($this->input->post('loginSubmit')){ 
-                $this->login_post();
-            }
-      } 
-   }
+         $user = $this->session->all_userdata();
+         $this->load->view('admin/dashboard/index',['user'=>$user]);
+     }
 
 }
