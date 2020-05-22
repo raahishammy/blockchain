@@ -8,7 +8,7 @@
 
         
         <!-- App title -->
-        <title>Registrer - Blockchain Application</title>
+        <title>Register - Blockchain Application</title>
 
         <!-- App css -->
         <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -136,10 +136,7 @@
 											</div>
 											<div class="col-sm-12">
 												<div class="form-group">
-												      <select name="country" class="countries order-alpha" id="countryId" required>
-												    <option value="">Select Country</option>
-												</select>
-
+												<select class="form-control bfh-countries" data-country="US" id="countryId" name="country" required></select>
 												</div>
 											</div>
 											<div class="clearfix form-actions">
@@ -171,10 +168,7 @@
                 </div>
             </div>
           </section>
-          <!-- END HOME -->
-          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
-      	<script src="//geodata.solutions/includes/countrystate.js"></script>
-        <script>
+            	 <script>
             var resizefunc = [];
         </script>
 		<style>
@@ -263,9 +257,7 @@
 		.form-control{color:#ccc}
 		select
 		</style>
-
-
-        <!-- jQuery  -->
+	    <!-- jQuery  -->
         <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
 		
         <script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
@@ -286,8 +278,7 @@
 		<script src="<?= base_url(); ?>assets/js/intlTelInput.min.js"></script>
 		<script src="<?= base_url(); ?>components/autosize/dist/autosize.js"></script>
 		<script src="<?= base_url(); ?>components/jquery-inputlimiter/jquery.inputlimiter.js"></script>
-
-	
+		<script src="<?= base_url(); ?>assets/zicros/js/bootstrap-formhelpers.min.js"></script>
 	
 	 
     <script>
