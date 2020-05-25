@@ -60,7 +60,7 @@
         <!--- Sidemenu -->
         <div id="sidebar-menu">
             <!-- Navigation  -->
-            <?php //echo $nav; ?>
+            <?php echo $nav; ?>
         </div>
         <!-- Sidebar -->
         <div class="clearfix"></div>

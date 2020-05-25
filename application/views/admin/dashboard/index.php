@@ -78,7 +78,7 @@
 									<ol class="breadcrumb p-0 m-0">
 										<li>
 											<i class="fa fa-home home-icon"></i>
-										  <a href="/home">Home</a>
+										  <a href="<?php echo site_url();?>">Home</a>
 										</li>
 										<li class="active">
 											Dashboard

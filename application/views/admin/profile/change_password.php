@@ -78,7 +78,11 @@
 									<ol class="breadcrumb p-0 m-0">
 										<li>
 											<i class="fa fa-home home-icon"></i>
-										  <a href="/home">Home</a>
+										  <a href="<?php echo site_url();?>">Home</a>
+										</li>
+										<li>
+											<i class="fa fa-dashboard dashboard-icon"></i>
+										  <a href="<?php echo site_url();?>dashboard">Dashboard</a>
 										</li>
 										<li class="active">
 											Change Password

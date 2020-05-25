@@ -80,4 +80,32 @@ class User extends CI_Model{
       return $query;
  }
 
+ public function get_user($id)
+    {
+    $this->db->select('*');
+    $this->db->from($this->table);
+    $this->db->where('id', $id);  // Also mention table name here
+    $query = $this->db->get();    
+    if($query->num_rows() > 0)
+        return $query->result();
+    }
+
+    public function update_referal($id, $referalId) 
+    {
+         $data = [
+            'referral_id' => $referalId
+        ];
+        $this->db->where('id', $id);
+        $this->db->update($this->table, $data);
+        echo 'Referal has successfully been updated';
+  }
+
+
+    public function update_profile_info($id, $data) 
+    {
+        $this->db->where('id', $id);
+        $this->db->update($this->table, $data);
+       
+  }
+
 }

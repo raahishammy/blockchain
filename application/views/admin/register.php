@@ -29,22 +29,10 @@
       .country-select .flag {background-image: url("<?= $this->config->item("s3_url"); ?>images/country-select-flags.png");}
       .country-select {width: 100%;}
 		</style>
-        <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
-
-    </head>
-
-
-    <body class="bg-company_register">
-
-        <!-- HOME -->
-        <section class="main-wrapper">
+         <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
+		</head>
+		 <body class="bg-company_register">
+	 <section class="main-wrapper">
             <div class="container-alt">
                 <div class="row">
                     <div class="col-sm-12">
@@ -98,11 +86,17 @@
 									<?php endif; ?>
 
 									<?php $attributes = array('class' => 'form-horizontal', 'id' => 'edit-form'); ?>
-										<?php echo form_open('register', $attributes); ?>
+										<?php echo form_open('affilate/sponser', $attributes); ?>
 										<div class="col-sm-12">
 											<div class="box-title text-center">Register User</div>
 											<div class="col-sm-12">
 												<div class="form-group">
+													<?php $sponserId =  $this->input->cookie('sponser_id',true);
+													if($sponserId !=""){?>
+													<input type="hidden" name="sponser_id" value="<?php echo $sponserId;?>">
+												<?php }else{?>
+														Invalid Affilate Link
+												<?php } ?>
 													<input type="text" id="name" name="name" value="<?php echo set_value('name'); ?>" placeholder="Enter User Name" class="form-control" />
 													<span class="required_star">*</span>
 												</div>
@@ -124,16 +118,8 @@
 												<input type="tel" id="contact" name="contact" value="<?php echo set_value('contact'); ?>" placeholder="e.g. +65 2123 4567" class="form-control" />
 												</div>
 											</div>
-											<div class="col-sm-12">
-												<div class="form-group">
-												  <select class="form-control" id="role" name="role" required>
-												    <option>Select Role</option>
-												    <option value="User">User</option>
-												    <option value="Subcon">Subcon</option>
-												    <option value="Subadmin">Subadmin</option>
-												  </select>
-												</div>
-											</div>
+											<input type="hidden" name="role" value="Subscriber">
+											
 											<div class="col-sm-12">
 												<div class="form-group">
 												<select class="form-control bfh-countries" data-country="US" id="countryId" name="country" required></select>
