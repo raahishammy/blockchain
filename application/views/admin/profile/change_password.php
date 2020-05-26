@@ -159,13 +159,14 @@
                         				<div class="">
                         					<!-- PAGE CONTENT BEGINS -->
 															<?php $attributes = array('class' => 'form-horizontal', 'id' => 'create-form'); ?>
-															<?php echo form_open(current_url(), $attributes); ?>
+															<?php echo form_open('update/password', $attributes); ?>
 															
 															<div class="form-group">
 																<label class="control-label no-padding-right" for="password"> Old Password </label>
 
 																
-																  <input type="password" id="password" name="password" value="" placeholder="Old Password" class="form-control" />
+																  <input type="password" id="password" name="password" value="" placeholder="Old Password" class="form-control" required/>
+																  
 																
 															</div>
 															
@@ -175,7 +176,7 @@
 																<label class="control-label no-padding-right" for="email"> New Password </label>
 
 																
-																  <input type="password" id="new_password" name="new_password" value="" placeholder="New Password" class="form-control" />
+																  <input type="password" id="new_password" name="new_password" value="" placeholder="New Password" class="form-control" required/>
 																
 															</div>
 
@@ -183,13 +184,13 @@
 																<label class="control-label no-padding-right" for="password"> Confirm Password </label>
 
 																
-																  <input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="form-control" />
+																  <input type="password" id="confirm_password" name="confirm_password" value="" placeholder="Confirm Password" class="form-control" required/>
 																
 															</div>
 															
 																<div class="clearfix form-actions">
 																	<div class="">
-																		<button class="btn btn-info" type="submit" form="create-form">
+																		<button class="btn btn-info" type="submit" form="create-form" name="changePswd" value="changePswd">
 																			<i class="ace-icon fa fa-check bigger-110"></i>
 																			Submit
 																		</button>
@@ -280,138 +281,6 @@
             <!-- /Right-bar -->
 
         </div>
-        <!-- END wrapper -->
-
-
-       
-
-        <!-- jQuery  -->
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/detect.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/fastclick.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.blockUI.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/waves.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.slimscroll.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.scrollTo.min.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/plugins/switchery/switchery.min.js"></script>
-
-        <!-- Counter js  -->
-        <script src="<?= base_url(); ?>assets/zicros/plugins/waypoints/jquery.waypoints.min.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/plugins/counterup/jquery.counterup.min.js"></script>
-
-        <!--Morris Chart-->
-		<script src="<?= base_url(); ?>assets/zicros/plugins/morris/morris.min.js"></script>
-		<script src="<?= base_url(); ?>assets/zicros/plugins/raphael/raphael-min.js"></script>
-
-        <!-- Dashboard init -->
-
-        <!-- App js -->
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.core.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.app.js"></script>
-		 <script>
-            var drivers_online = '<?=$drivers_online?>';
-            var resizefunc = [];
-			!function($) {
-				"use strict";
-
-				var Dashboard1 = function() {
-					this.$realData = []
-				};
-
-				//creates Bar chart
-				Dashboard1.prototype.createBarChart  = function(element, data, xkey, ykeys, labels, lineColors) {
-					Morris.Bar({
-						element: element,
-						data: data,
-						xkey: xkey,
-						ykeys: ykeys,
-						labels: labels,
-						hideHover: 'auto',
-						resize: true, //defaulted to true
-						gridLineColor: '#eeeeee',
-						barSizeRatio: 0.2,
-						barColors: lineColors,
-						preUnits: '$'
-					});
-				},
-
-				//creates line chart
-				Dashboard1.prototype.createLineChart = function(element, data, xkey, ykeys, labels, opacity, Pfillcolor, Pstockcolor, lineColors) {
-					Morris.Line({
-					  element: element,
-					  data: data,
-					  xkey: xkey,
-					  ykeys: ykeys,
-					  labels: labels,
-					  fillOpacity: opacity,
-					  pointFillColors: Pfillcolor,
-					  pointStrokeColors: Pstockcolor,
-					  behaveLikeLine: true,
-					  gridLineColor: '#eef0f2',
-					  hideHover: 'auto',
-					  resize: true, //defaulted to true
-					  pointSize: 0,
-					  lineColors: lineColors,
-						postUnits: '@'
-					});
-				},
-
-				//creates Donut chart
-				Dashboard1.prototype.createDonutChart = function(element, data, colors) {
-					Morris.Donut({
-						element: element,
-						data: data,
-						resize: true, //defaulted to true
-						colors: colors
-					});
-				},
-
-				
-				Dashboard1.prototype.init = function() {
-
-					//creating bar chart
-					var $barData  = [
-						{ y: '<?php echo $revenue_sixmonths[0]['month']; ?>', a: '<?php echo $revenue_sixmonths[0]['total']; ?>' },
-						{ y: '<?php echo $revenue_sixmonths[1]['month']; ?>', a: '<?php echo $revenue_sixmonths[1]['total']; ?>' },
-						{ y: '<?php echo $revenue_sixmonths[2]['month']; ?>', a: '<?php echo $revenue_sixmonths[2]['total']; ?>' },
-						{ y: '<?php echo $revenue_sixmonths[3]['month']; ?>', a: '<?php echo $revenue_sixmonths[3]['total']; ?>' },
-						{ y: '<?php echo $revenue_sixmonths[4]['month']; ?>', a: '<?php echo $revenue_sixmonths[4]['total']; ?>' },
-						{ y: '<?php echo $revenue_sixmonths[5]['month']; ?>', a: '<?php echo $revenue_sixmonths[5]['total']; ?>' }
-						
-					];
-					this.createBarChart('morris-bar-revenue', $barData, 'y', ['a'], ['Statistics'], ['#3bafda']);
-
-					//create line chart
-					 var $data  = [
-						{ y: '<?php echo $cancel_by_pass[0]['month']; ?>', a: '<?php echo $cancel_by_pass[0]['no_trips']; ?>', b: '<?php echo $cancel_by_drv[0]['no_trips']; ?>' },
-						{ y: '<?php echo $cancel_by_pass[1]['month']; ?>', a: '<?php echo $cancel_by_pass[1]['no_trips']; ?>', b: '<?php echo $cancel_by_drv[1]['no_trips']; ?>' },
-						{ y: '<?php echo $cancel_by_pass[2]['month']; ?>', a: '<?php echo $cancel_by_pass[2]['no_trips']; ?>', b: '<?php echo $cancel_by_drv[2]['no_trips']; ?>' },
-						{ y: '<?php echo $cancel_by_pass[3]['month']; ?>', a: '<?php echo $cancel_by_pass[3]['no_trips']; ?>', b: '<?php echo $cancel_by_drv[3]['no_trips']; ?>' },
-						{ y: '<?php echo $cancel_by_pass[4]['month']; ?>', a: '<?php echo $cancel_by_pass[4]['no_trips']; ?>', b: '<?php echo $cancel_by_drv[4]['no_trips']; ?>' },
-						{ y: '<?php echo $cancel_by_pass[5]['month']; ?>', a: '<?php echo $cancel_by_pass[5]['no_trips']; ?>', b: '<?php echo $cancel_by_drv[5]['no_trips']; ?>' }
-					  ];
-					this.createBarChart('morris-line-example', $data, 'y', ['a','b'], ['Passanger','Driver'],['#10c469','#188ae2']); 
-
-					//creating donut chart
-                    
-                    console.log(drivers_online);
-					var $donutData = [
-							{label: "Online", value: <?php echo $order_source['online']; ?>},
-							{label: "Mobile App", value: <?php echo $order_source['phone']; ?>},
-							{label: "Driver App", value: drivers_online}
-						];
-					this.createDonutChart('sales-source-donut', $donutData, ['#4bd396', '#f5707a','#3c763d']);
-				},
-				//init
-				$.Dashboard1 = new Dashboard1, $.Dashboard1.Constructor = Dashboard1
-			}(window.jQuery),
-
-			//initializing 
-			function($) {
-				"use strict";
-				$.Dashboard1.init();
-			}(window.jQuery);
-        </script>
+        
     </body>
 </html>

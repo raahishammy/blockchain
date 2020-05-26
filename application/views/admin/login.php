@@ -88,7 +88,7 @@
                                         </div>
                                     <?php endif; ?>
                                     
-                                    <?php $attributes = array('class' => 'form ajax form-horizontal', 'id' => 'login-form','method' => 'post'); ?>
+                                    <?php $attributes = array('class' => 'form form-horizontal', 'id' => 'login-form','method' => 'post'); ?>
                                    <?php echo form_open(base_url().'authenticate/login_post', $attributes); ?>
                                         <div class="form-group ">
                                             <div class="col-xs-12">
@@ -173,53 +173,13 @@
                 </div>
             </div>
           </section>
-          <!-- END HOME -->
-
-        <script>
-            var resizefunc = [];
-        </script>
-
-        <!-- jQuery  -->
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
+         <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
         <script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/detect.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/fastclick.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.blockUI.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/waves.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.slimscroll.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.scrollTo.min.js"></script>
-
         <script src="<?= base_url(); ?>components/jquery-validation/dist/jquery.validate.js"></script>
-        <script src="<?= base_url(); ?>assets/js/eldarion-ajax.min.js"></script>
-        <!-- App js -->
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.core.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.app.js"></script>
+        
         <!-- inline scripts related to this page -->
         <script type="text/javascript">
-        $(function() {
-            $(document).on("eldarion-ajax:begin", function(evt, $el) {
-              // $el.html("Processing...");
-            });
-
-            $(document).on("eldarion-ajax:success", function(evt, $el, data, textStatus, jqXHR) {
-                // console.log(evt);
-                // console.log(data);
-                // console.log(jqXHR);
-
-            });
-
-            $(document).on("eldarion-ajax:error", function(evt, $el, data, textStatus, jqXHR) {
-                // console.log(evt);
-                // console.log(data);
-                // console.log(jqXHR);
-            });
-            $(document).on('click', 'a[data-target]', function(e) {
-                e.preventDefault();
-                var target = $(this).data('target');
-                $('.account-content').addClass('hidden');//hide others
-                $(target).removeClass('hidden');//show target
-            });
-            $('#login-form').validate({
+       $('#login-form').validate({
                 errorElement: 'div',
                 errorClass: 'help-block',
                 focusInvalid: false,
@@ -262,47 +222,6 @@
                 invalidHandler: function (form) {
                 }
             });
-
-            $('#reset-password-form').validate({
-                errorElement: 'div',
-                errorClass: 'help-block',
-                focusInvalid: false,
-                ignore: "",
-                rules: {
-                  u: {
-                    required: true,
-                    email:true
-                  }
-                },
-                messages: {
-                },
-                highlight: function (e) {
-                  $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-                },
-
-                success: function (e) {
-                  $(e).closest('.form-group').removeClass('has-error').addClass('has-info');//.addClass('has-success');
-                  $(e).remove();
-                },
-
-                errorPlacement: function (error, element) {
-                  if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
-                    var controls = element.closest('div[class*="col-"]');
-                    if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-                    else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-                  }
-                  else if(element.is('.select2')) {
-                    error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-                  }
-                  else if(element.is('.chosen-select')) {
-                    error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-                  }
-                  else error.insertAfter(element);
-                },
-                invalidHandler: function (form) {
-                }
-            });
-        });
-        </script>
+     </script>
     </body>
 </html>

@@ -57,10 +57,9 @@ class Authenticate extends CI_Controller {
                   $this->load->library('session');
                   $this->session->set_userdata($user);
                   redirect('dashboard');
-              //return redirect(base_url('dashboard'));
              }
         }else{
-            $this->load->view('admin/login');
+          redirect('login');
         }
     } 
 
@@ -137,7 +136,11 @@ class Authenticate extends CI_Controller {
     public function dashboard_view()
     {
         $user = $this->session->all_userdata();
+        if(!empty($user['id'])){
          $this->load->view('admin/dashboard/index',['user'=>$user]);
+        }else{
+          redirect('login');
+        }
      }
 
      public function affilate_load()
