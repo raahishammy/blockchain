@@ -144,6 +144,13 @@ class Authenticate extends CI_Controller {
                     $insert_id = $this->db->insert_id();
                     $referalId = rtrim(strtr(base64_encode($insert_id), '+/', '-_'), '=');
                     $this->user->update_referal($insert_id, $referalId);
+                    $subject = "Referal Link";
+                    $referallink  = site_url().'referral/'.$referalId;
+                    $message="<html><body><span>Hello ".strip_tags($this->input->post('name')). ",</br>
+                    Welcome to Blockhain and congratulations on becoming a  member</br>
+                    Referral link:  " . $referallink . "</br></span></body></html>";
+                    $to = $this->input->post('email');
+                    $this->send_message($subject, $message, $to);
                     $this->session->set_flashdata('success', 'Your account registration has been successful. Please login to your account.');
                     redirect('login'); 
                 }else{ 
@@ -161,4 +168,26 @@ class Authenticate extends CI_Controller {
         redirect($_SERVER['HTTP_REFERER'], $data);
     }
 
+
+    public function send_message($subject, $message, $to) {
+        $this->load->config('email');
+        $this->load->library('email');
+        
+        $from = $this->config->item('smtp_user');
+        $to = $to;
+        $subject = $subject;
+        $message = $message;
+
+        $this->email->set_newline("\r\n");
+        $this->email->from($from);
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+
+        if ($this->email->send()) {
+            echo 'Your Email has successfully been sent.';
+        } else {
+            show_error($this->email->print_debugger());
+        }
+    }
 }
