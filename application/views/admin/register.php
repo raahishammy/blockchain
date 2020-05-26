@@ -86,7 +86,7 @@
 									<?php endif; ?>
 
 									<?php $attributes = array('class' => 'form-horizontal', 'id' => 'edit-form'); ?>
-										<?php echo form_open('referral/sponser', $attributes); ?>
+									<?php echo form_open(base_url().'authenticate/affilate_register', $attributes); ?>
 										<div class="col-sm-12">
 											<div class="box-title text-center">Register User</div>
 											<div class="col-sm-12">

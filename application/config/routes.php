@@ -59,8 +59,8 @@ $route['translate_uri_dashes'] = FALSE;
 $route['default_controller'] = 'frontend/homepage/index';
 $route['login'] = 'authenticate/index';
 $route['referral/(:any)'] = 'authenticate/affilate_load';
-$route['referral/sponser'] = 'authenticate/affilate_register';
-$route['register'] = 'authenticate/register_view';
+//$route['referral/sponser'] = 'authenticate/affilate_register';
+//$route['register'] = 'authenticate/register_view';
 /********************Front end***************/
 
 
