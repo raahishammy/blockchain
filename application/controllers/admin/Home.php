@@ -41,9 +41,11 @@ class Home extends CI_Controller {
             );
     	$this->session->set_userdata($data);
     	$this->user->update_profile_info($id, $data);
+      $this->session->set_flashdata('success', 'Profile updated successfully.');
     	redirect('profile');
     }else{
-    	 $data['error_msg'] = 'Please fill all the mandatory fields.'; 
+       $this->session->set_flashdata('fail', 'Please fill all the mandatory fields.');
+    	 redirect('profile');
     }
   }
 

@@ -59,6 +59,7 @@ class Authenticate extends CI_Controller {
                   redirect('dashboard');
              }
         }else{
+           $this->session->set_flashdata('fail', 'Invalid Email or Password.');
           redirect('login');
         }
     } 

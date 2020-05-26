@@ -5,13 +5,8 @@
         <meta charset="utf-8" />
         <meta name="description" content="User login page" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-        
-        
-        <!-- App title -->
         <title>Login - Block Application</title>
-
-        <!-- App css -->
-        <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+         <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/core.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/components.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/icons.css" rel="stylesheet" type="text/css" />
@@ -20,21 +15,14 @@
         <link href="<?= base_url(); ?>assets/zicros/css/login.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/responsive.css" rel="stylesheet" type="text/css" />
           <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
-
-    </head>
-
-
-    <body class="bg-transparent">
-
-        <!-- HOME -->
-        <section class="main-wrapper">
+      </head>
+        <body class="bg-transparent">
+         <section class="main-wrapper">
             <div class="container-alt">
                 <div class="row">
                     <div class="col-sm-12">
-
                         <div class="wrapper-page">
-
-                            <div class="m-t-20 account-pages">
+                        <div class="m-t-20 account-pages">
                                 <div class="col-sm-12">
                                 <div class="col-sm-6 col-sm-offset-3 centered brand">
                                 <img src="<?= base_url(); ?>assets/images/logo.png" class="centered">
@@ -53,8 +41,7 @@
                                             <button type="button" class="close" data-dismiss="alert">
                                                 <i class="ace-icon fa fa-times"></i>
                                             </button>
-
-                                            <strong>
+                                             <strong>
                                                 <i class="ace-icon fa fa-times"></i>
                                             </strong>
 
@@ -132,38 +119,7 @@
                                     <div class="clearfix"></div>
 
                                 </div>
-                                <div id="forgot-box" class="account-content hidden">
-                                    <div class="text-center m-b-20">
-                                        <p class="text-muted m-b-0 font-13">Enter your email address and we'll send you an email with instructions to reset your password.  </p>
-                                    </div>
-                                    <?php $attributes = array('class' => 'form ajax form-horizontal', 'id' => 'reset-password-form'); ?>
-                                        <?php echo form_open('account/reset_password', $attributes); ?>
-                                        <div class="form-group">
-                                            <div class="col-xs-12">
-                                                <input class="form-control" type="email" name='u' required=""
-                                                       placeholder="Enter email">
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="request" value="passemail" />
-                                        <div class="form-group account-btn text-center m-t-10">
-                                            <div class="col-xs-12">
-                                                <button class="btn w-md btn-bordered btn-danger waves-effect waves-light"
-                                                        type="submit">Send Email
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </form>
-
-                                    <div class="clearfix"></div>
-
-                                    <div class="row m-t-50">
-                                        <div class="col-sm-12 text-center">
-                                            <a href="#" data-target="#login-box" class="text-primary m-l-5">
-                                            <p class="text-muted"><i class="fa fa-arrow-left"></i>&nbsp; Back to login</p></a>
-                                        </div>
-                                    </div>
-                                </div>
+                               
                             </div>
                             <!-- end card-box-->
                         </div>
