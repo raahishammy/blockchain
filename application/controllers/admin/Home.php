@@ -66,7 +66,12 @@ class Home extends CI_Controller {
       $this->form_validation->set_rules('new_password', 'new password', 'required');
       $this->form_validation->set_rules('confirm_password', 'confirm password', 'required|matches[new_password]');
         if($this->form_validation->run() == false) {
-          $this->session->set_flashdata('fail', $data);
+          if($this->input->post('new_password') != $this->input->post('confirm_password')){
+             $this->session->set_flashdata('fail', 'The password and confirmation password do not match.');
+          }else{
+             $this->session->set_flashdata('fail', 'The old password you have entered is incorrect.');
+          }
+          
           redirect('change_password');
          }
         else {
