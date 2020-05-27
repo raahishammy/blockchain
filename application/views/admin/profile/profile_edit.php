@@ -10,6 +10,7 @@
          <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/core.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/components.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="<?= base_url(); ?>assets/css/intlTelInput.css">
         <link href="<?= base_url(); ?>assets/zicros/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/pages.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/menu.css" rel="stylesheet" type="text/css" />
@@ -18,6 +19,12 @@
 		<!-- Others related css -->
 		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome.min.css" />
 		<link href="<?= base_url(); ?>assets/css/custom.css" rel="stylesheet" type="text/css" />
+          <link rel="stylesheet" href="<?= base_url(); ?>assets/css/countrySelect.min.css">
+          <style>
+            .iti-flag {background-image: url("<?= $this->config->item("s3_url"); ?>images/flags.png");}
+      .country-select .flag {background-image: url("<?= $this->config->item("s3_url"); ?>images/country-select-flags.png");}
+      .country-select {width: 100%;}
+        </style>
     <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
     </head>
     <body class="fixed-left">
@@ -156,6 +163,33 @@
 	<?php $this->load->view('admin/layouts/footer') ?>
      <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
         <script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
+        <script src="<?= base_url(); ?>components/jquery-validation/dist/jquery.validate.js"></script>
+        <script src="<?= base_url(); ?>components/typeahead.js/dist/typeahead.jquery.js"></script>
+        <script src="<?= base_url(); ?>assets/js/intlTelInput.min.js"></script>
+        <script>
+            jQuery(function($) {
+            $("#contact").intlTelInput({
+             preferredCountries: ["au", "in", "gb", "nz", "sg", "us" ],
+             // allowDropdown: false,
+            // autoHideDialCode: true,
+             // autoPlaceholder: false,
+             dropdownContainer: "body",
+             // excludeCountries: ["us"],
+             geoIpLookup: function(callback) {
+               $.getJSON('https://freegeoip.net/json/')
+                .done (function(resp)
+                {
+                  var countryCode = (resp && resp.country_code) ? resp.country_code : "";
+                  callback(countryCode);
+                });
+             },
+             initialCountry: "sg",
+             nationalMode: false,
+             // separateDialCode: true,
+             utilsScript: "<?= base_url(); ?>assets/js/utils.js"
+          });
+        });
+        </script>
  </div>
  </div>
   </body>
