@@ -14,6 +14,7 @@ class Referral extends CI_Controller {
 	  	require_once APPPATH . '../vendor/autoload.php';
 	}
 
+ 
   public function referral_update()
   {
   	$id = $this->uri->segment(3);
@@ -28,13 +29,9 @@ class Referral extends CI_Controller {
 	  	}
   }
 
-  Public function load_referral(){
+  public function load_referral()
+  {
   	 $user = $this->session->all_userdata();
      $this->load->view('admin/referral/view',['user'=>$user]);
   }
-
- 
-	
-	
-
 }

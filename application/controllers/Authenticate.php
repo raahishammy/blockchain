@@ -172,19 +172,16 @@ class Authenticate extends CI_Controller {
     public function send_message($subject, $message, $to) {
         $this->load->config('email');
         $this->load->library('email');
-        
         $from = $this->config->item('smtp_user');
         $to = $to;
         $subject = $subject;
         $message = $message;
-
         $this->email->set_newline("\r\n");
         $this->email->from($from);
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
-
-        if ($this->email->send()) {
+       if ($this->email->send()) {
             echo 'Your Email has successfully been sent.';
         } else {
             show_error($this->email->print_debugger());
