@@ -116,6 +116,15 @@ class User extends CI_Model{
         $query = $this->db->get();
         return $query->row();
     }
+
+    public function get_user_tree($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('parent_id', $id);
+        $query = $this->db->get();
+        return $query->result();
+    }
   
 
 }

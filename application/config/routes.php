@@ -69,7 +69,7 @@ $route['profile'] = 'admin/home/profile';
 $route['profile/update'] = 'admin/home/profile_update';
 $route['change_password'] = 'admin/home/change_password';
 $route['update/password'] = 'admin/home/update_password';
-
 $route['referral'] = 'admin/referral/load_referral';
 
+$route['user/graphical'] = 'admin/user_graphical/graphical_tree';
 /************End admin layouts************/
