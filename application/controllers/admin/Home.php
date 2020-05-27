@@ -9,8 +9,8 @@ class Home extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->helper('url');
-	  	$this->load->model('user'); 
-		$this->load->library('form_validation'); 
+	  $this->load->model('user'); 
+		$this->load->library('form_validation');
 		$this->load->library('session');
 		$this->isUserLoggedIn = $this->session->userdata('isUserLoggedIn'); 
 		require_once APPPATH . '../vendor/autoload.php';
@@ -20,7 +20,11 @@ class Home extends CI_Controller {
   {
      $this->load->library('session');
      $user = $this->session->all_userdata();
+     if(!empty($user['id'])){
      $this->load->view('admin/profile/profile_edit', ['user'=>$user]);
+     }else{
+      redirect('login');
+     }
   }
 
   public function profile_update()
@@ -37,18 +41,60 @@ class Home extends CI_Controller {
             );
     	$this->session->set_userdata($data);
     	$this->user->update_profile_info($id, $data);
+      $this->session->set_flashdata('success', 'Profile updated successfully.');
     	redirect('profile');
     }else{
-    	 $data['error_msg'] = 'Please fill all the mandatory fields.'; 
+       $this->session->set_flashdata('fail', 'Please fill all the mandatory fields.');
+    	 redirect('profile');
     }
   }
 
   public function change_password()
   {
     $user = $this->session->all_userdata();
+    if(!empty($user['id'])){
     $this->load->view('admin/profile/change_password', $user);
+    }else{
+      redirect('login');
+    }
   }
-	
+
+  public function update_password()
+  {
+  $this->load->library('form_validation');
+   if($this->input->post('changePswd'))
+    {
+      $this->form_validation->set_rules('password', 'old password', 'callback_password_check');
+      $this->form_validation->set_rules('new_password', 'new password', 'required');
+      $this->form_validation->set_rules('confirm_password', 'confirm password', 'required|matches[new_password]');
+        if($this->form_validation->run() == false) {
+          if($this->input->post('new_password') != $this->input->post('confirm_password')){
+             $this->session->set_flashdata('fail', 'The password and confirmation password do not match.');
+          }else{
+             $this->session->set_flashdata('fail', 'The old password you have entered is incorrect.');
+          }
+          
+          redirect('change_password');
+         }
+        else {
+          $id = $this->session->userdata('id');
+          $new_password = $this->input->post('new_password');
+          $this->user->update_profile_info($id, array('password' => md5($new_password)));
+          redirect('logout');
+        }
+   }
+}
+
+public function password_check($password)
+    {
+        $id = $this->session->userdata('id');
+        $user = $this->user->get_userinfo($id);
+        if($user->password !== md5($password)) {
+            $this->form_validation->set_message('password_check', 'The {field} does not match');
+            return false;
+        }
+        return true;
+    }
 	
 
 }

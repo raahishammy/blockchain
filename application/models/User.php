@@ -106,6 +106,17 @@ class User extends CI_Model{
         $this->db->where('id', $id);
         $this->db->update($this->table, $data);
        
-  }
+    }
+
+
+    public function get_userinfo($id)
+    {
+        $this->db->select('*');
+        $this->db->from($this->table);
+        $this->db->where('id', $id);
+        $query = $this->db->get();
+        return $query->row();
+    }
+  
 
 }

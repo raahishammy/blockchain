@@ -5,17 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-
-        
-        <!-- App title -->
         <title>Edit Customer Account</title>
-
-        <!--Morris Chart CSS -->
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/zicros/plugins/morris/morris.css">
-
-        <!-- App css -->
-		
-        <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="<?= base_url(); ?>assets/zicros/plugins/morris/morris.css">
+         <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/core.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/components.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/icons.css" rel="stylesheet" type="text/css" />
@@ -27,14 +19,9 @@
 		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome.min.css" />
 		<link href="<?= base_url(); ?>assets/css/custom.css" rel="stylesheet" type="text/css" />
     <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
-
     </head>
-
-
     <body class="fixed-left">
-
-        <!-- Loader -->
-        <div id="preloader">
+     <div id="preloader">
             <div id="status">
                 <div class="spinner">
                   <div class="spinner-wrapper">
@@ -46,20 +33,12 @@
                 </div>
             </div>
         </div>
-
-        <!-- Begin page -->
         <div id="wrapper">
-            <!-- Header Top  -->
             <?php
                 $header_data = array();
                 $header_data['nav'] = $this->load->view('admin/layouts/nav', ['dashboard' => 'active'], true);
                 $this->load->view('admin/layouts/header', $header_data);
             ?>
-            <!-- Header End  -->
-
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->
             <div class="content-page">
                 <!-- Start content -->
                 <div class="content">
@@ -83,6 +62,49 @@
 									</ol>
 									<div class="clearfix"></div>
 								</div>
+                               <div class="col-md-12">
+                        <?php if (!empty(validation_errors())): ?>
+                                                            <div class="alert alert-danger">
+                                                                <button type="button" class="close" data-dismiss="alert">
+                                                                    <i class="ace-icon fa fa-times"></i>
+                                                                </button>
+                                                                <?php echo validation_errors('<li>', '</li>') ?>
+                                                                <br />
+                                                            </div>
+                                                            <?php endif; ?>
+                                                            
+                                                            <?php if ($this->session->flashdata('warning')): ?>
+                                                            <div class="alert alert-warning">
+                                                                <button type="button" class="close" data-dismiss="alert">
+                                                                    <i class="ace-icon fa fa-times"></i>
+                                                                </button>
+                                                                <?php echo $this->session->flashdata('warning') ?>
+                                                                <br />
+                                                            </div>
+                                                            <?php endif; ?>
+                                                            
+                                                            <?php if ($this->session->flashdata('fail')): ?>
+                                                            <div class="alert alert-danger">
+                                                                <button type="button" class="close" data-dismiss="alert">
+                                                                    <i class="ace-icon fa fa-times"></i>
+                                                                </button>
+                                                                <?php echo $this->session->flashdata('fail') ?>
+                                                                <br />
+                                                            </div>
+                                                            <?php endif; ?>
+                                                        <?php if ($this->session->flashdata('success')): ?>
+                                                            <div class="alert alert-success">
+                                                                <button type="button" class="close" data-dismiss="alert">
+                                                                    <i class="ace-icon fa fa-times"></i>
+                                                                </button>
+
+                                                                <?php echo $this->session->flashdata('success') ?>
+                                                                <br />
+                                                            </div>
+                                                        <?php endif; ?>
+                        </div>
+
+                            
                	<?php $attributes = array('class' => 'form-horizontal', 'id' => 'edit-form', 'method' => 'post'); ?>
 							   <?php echo form_open(base_url().'profile/update', $attributes); ?>
                <div class="form-group">

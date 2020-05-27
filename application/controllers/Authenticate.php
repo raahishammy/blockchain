@@ -57,10 +57,10 @@ class Authenticate extends CI_Controller {
                   $this->load->library('session');
                   $this->session->set_userdata($user);
                   redirect('dashboard');
-              //return redirect(base_url('dashboard'));
              }
         }else{
-            $this->load->view('admin/login');
+           $this->session->set_flashdata('fail', 'Invalid Email or Password.');
+          redirect('login');
         }
     } 
 
@@ -72,52 +72,6 @@ class Authenticate extends CI_Controller {
         redirect('login'); 
     } 
 
-    public function register_view(){
-    	if($this->isUserLoggedIn){ 
-            $this->load->view('admin/dashboard/login');
-        }else{ 
-             $this->load->view('admin/register');
-             if($this->input->post('signupSubmit')){ 
-                $this->register_post();
-            }
-        } 
-    }
-
-
-    public function register_post(){
-      $data = $userData = array(); 
-        if($this->input->post('signupSubmit')){ 
-            $this->form_validation->set_rules('name', 'Name', 'required'); 
-            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check'); 
-            $this->form_validation->set_rules('password', 'password', 'required'); 
-            $this->form_validation->set_rules('contact', 'contact', 'required'); 
-            $this->form_validation->set_rules('role', 'role', 'required'); 
-            $this->form_validation->set_rules('country', 'country', 'required'); 
-            $c_date =date("Y-m-d H:i:s");
-            $userData = array( 
-                'name' => strip_tags($this->input->post('name')), 
-                'email' => strip_tags($this->input->post('email')), 
-                'password' => md5($this->input->post('password')), 
-                'contact' => strip_tags($this->input->post('contact')), 
-                'role' => $this->input->post('role'),
-                'country_code' => $this->input->post('country')
-            ); 
-            if($this->form_validation->run() == true){ 
-                $insert = $this->user->insert($userData); 
-                if($insert){ 
-                    $this->session->set_userdata('success_msg', 'Your account registration has been successful. Please login to your account.'); 
-                    redirect('login'); 
-                }else{ 
-                    $data['error_msg'] = 'Some problems occured, please try again.'; 
-                } 
-            }else{ 
-                $data['error_msg'] = 'Please fill all the mandatory fields.'; 
-            } 
-        } 
-        $data['user'] = $userData; 
-        $this->load->view('admin/register', $data); 
-    }
-
     public function email_check($str){ 
         $con = array( 
             'returnType' => 'count', 
@@ -127,7 +81,9 @@ class Authenticate extends CI_Controller {
         ); 
         $checkEmail = $this->user->getRows($con); 
         if($checkEmail > 0){ 
-            $this->form_validation->set_message('email_check', 'The given email already exists.'); 
+          $this->form_validation->set_message('email_check', 'The given email already exists.'); 
+            $this->session->set_flashdata('fail', 'The given email already exists.');
+                    redirect($_SERVER['HTTP_REFERER']);
             return FALSE; 
         }else{ 
             return TRUE; 
@@ -137,7 +93,11 @@ class Authenticate extends CI_Controller {
     public function dashboard_view()
     {
         $user = $this->session->all_userdata();
+        if(!empty($user['id'])){
          $this->load->view('admin/dashboard/index',['user'=>$user]);
+        }else{
+          redirect('login');
+        }
      }
 
      public function affilate_load()
@@ -181,20 +141,53 @@ class Authenticate extends CI_Controller {
             if($this->form_validation->run() == true){ 
                 $insert = $this->user->insert($userData); 
                 if($insert){ 
-                    $this->session->set_userdata('success_msg', 'Your account registration has been successful. Please login to your account.'); 
                     $insert_id = $this->db->insert_id();
                     $referalId = rtrim(strtr(base64_encode($insert_id), '+/', '-_'), '=');
                     $this->user->update_referal($insert_id, $referalId);
+                    $subject = "Referal Link";
+                    $referallink  = site_url().'referral/'.$referalId;
+                    $message="<html><body><span>Hello ".strip_tags($this->input->post('name')). ",</br>
+                    Welcome to Blockhain and congratulations on becoming a  member</br>
+                    Referral link:  " . $referallink . "</br></span></body></html>";
+                    $to = $this->input->post('email');
+                    $this->send_message($subject, $message, $to);
+                    $this->session->set_flashdata('success', 'Your account registration has been successful. Please login to your account.');
                     redirect('login'); 
                 }else{ 
                     $data['error_msg'] = 'Some problems occured, please try again.'; 
+                    $this->session->set_flashdata('fail', 'Some problems occured, please try again.');
+                    redirect($_SERVER['HTTP_REFERER']);
                 } 
             }else{ 
                 $data['error_msg'] = 'Please fill all the mandatory fields.'; 
+                 $this->session->set_flashdata('fail', 'Please fill all the mandatory fields.');
+                redirect($_SERVER['HTTP_REFERER']);
             } 
         } 
         $data['user'] = $userData; 
-        $this->load->view('admin/register', $data); 
+        redirect($_SERVER['HTTP_REFERER'], $data);
     }
 
+
+    public function send_message($subject, $message, $to) {
+        $this->load->config('email');
+        $this->load->library('email');
+        
+        $from = $this->config->item('smtp_user');
+        $to = $to;
+        $subject = $subject;
+        $message = $message;
+
+        $this->email->set_newline("\r\n");
+        $this->email->from($from);
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+
+        if ($this->email->send()) {
+            echo 'Your Email has successfully been sent.';
+        } else {
+            show_error($this->email->print_debugger());
+        }
+    }
 }
