@@ -2,137 +2,125 @@
 <html lang="en">
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<meta name="description" content="User login page" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
-        
-        <!-- App title -->
-        <title>Register - Blockchain Application</title>
-
-        <!-- App css -->
-        <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <meta charset="utf-8" />
+        <meta name="description" content="User login page" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <title>Register - Block Application</title>
+         <link href="<?= base_url(); ?>assets/zicros/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/core.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/components.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="<?= base_url(); ?>assets/css/intlTelInput.css">
         <link href="<?= base_url(); ?>assets/zicros/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/pages.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/menu.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>assets/zicros/css/login.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>assets/zicros/css/responsive.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/intlTelInput.css">
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/css/custom.css">
-		<link rel="stylesheet" href="<?= base_url(); ?>assets/zicros/css/style.css" />
-    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/countrySelect.min.css">
-
-
-		<style>
+         <link rel="stylesheet" href="<?= base_url(); ?>assets/css/countrySelect.min.css">
+			<style>
 			.iti-flag {background-image: url("<?= $this->config->item("s3_url"); ?>images/flags.png");}
       .country-select .flag {background-image: url("<?= $this->config->item("s3_url"); ?>images/country-select-flags.png");}
       .country-select {width: 100%;}
 		</style>
-         <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
-		</head>
-		 <body class="bg-company_register">
-	 <section class="main-wrapper">
+		  <script src="<?= base_url(); ?>assets/zicros/js/modernizr.min.js"></script>
+      </head>
+        <body class="bg-transparent">
+         <section class="main-wrapper">
             <div class="container-alt">
                 <div class="row">
                     <div class="col-sm-12">
+                        <div class="wrapper-page">
+                        <div class="m-t-20 account-pages">
+                                <div class="col-sm-12">
+                                <div class="col-sm-6 col-sm-offset-3 centered brand">
+                                <img src="<?= base_url(); ?>assets/images/logo.png" class="centered">
+                                <p><span class="red">Block Chain Register User</span></p>
+                                </div>
+                            </div>
+                                <div id="login-box" class="account-content">
+                                   
+                                    <?php if ($this->session->flashdata('fail')): ?>
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                                <i class="ace-icon fa fa-times"></i>
+                                            </button>
+                                             <strong>
+                                                <i class="ace-icon fa fa-times"></i>
+                                            </strong>
 
-                        <div class="">
+                                            <?php echo $this->session->flashdata('fail') ?>
+                                            <br />
+                                        </div>
+                                    <?php elseif ($this->session->flashdata('errors')): ?>
+                                        <div class="alert alert-danger">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                                <i class="ace-icon fa fa-times"></i>
+                                            </button>
 
-                            <div class="register-pages col-container">
-							<div class="col-sm-1 col"></div>
-                                <div id="login-box" class="account-content col-sm-4 col">
-									<?php if (!empty(validation_errors())): ?>
-										<div class="alert alert-danger">
-											<button type="button" class="close" data-dismiss="alert">
-												<i class="ace-icon fa fa-times"></i>
-											</button>
+                                            <strong>
+                                                <i class="ace-icon fa fa-times"></i>
+                                            </strong>
+                                            <?php foreach($this->session->flashdata('errors') as $errormsg){ echo $errormsg; } ?>
+                                            <br />
+                                        </div>
+                                    <?php elseif ($this->session->flashdata('success')): ?>
+                                        <div class="alert alert-success">
+                                            <button type="button" class="close" data-dismiss="alert">
+                                                <i class="ace-icon fa fa-times"></i>
+                                            </button>
 
-											<strong>
-												<i class="ace-icon fa fa-times"></i>
-											</strong>
+                                            <strong>
+                                                <i class="ace-icon fa fa-check"></i>
+                                            </strong>
 
-											<?php echo validation_errors('<br />', '') ?>
-											<br />
-										</div>
-										<?php endif; ?>
-										<?php if ($this->session->flashdata('fail')): ?>
-										<div class="alert alert-danger">
-											<button type="button" class="close" data-dismiss="alert">
-												<i class="ace-icon fa fa-times"></i>
-											</button>
-
-											<strong>
-												<i class="ace-icon fa fa-times"></i>
-											</strong>
-
-											<?php echo $this->session->flashdata('fail') ?>
-											<br />
-										</div>
-										<?php endif; ?>
-									<?php if ($this->session->flashdata('success')): ?>
-										<div class="alert alert-success">
-											<button type="button" class="close" data-dismiss="alert">
-												<i class="ace-icon fa fa-times"></i>
-											</button>
-
-											<strong>
-												<i class="ace-icon fa fa-check"></i>
-											</strong>
-
-											<?php echo $this->session->flashdata('success') ?>
-											<br />
-										</div>
-									<?php endif; ?>
-
-									<?php $attributes = array('class' => 'form-horizontal', 'id' => 'edit-form'); ?>
+                                            <?php echo $this->session->flashdata('success') ?>
+                                            <br />
+                                        </div>
+                                    <?php endif; ?>
+                                    
+                                    <?php $attributes = array('class' => 'form-horizontal', 'id' => 'edit-form'); ?>
 									<?php echo form_open(base_url().'authenticate/affilate_register', $attributes); ?>
-										<div class="col-sm-12">
-											<div class="box-title text-center">Register User</div>
-											<div class="col-sm-12">
-												<div class="form-group">
-													<?php $sponserId =  $this->input->cookie('sponser_id',true);
+									<?php $sponserId =  $this->input->cookie('sponser_id',true);
 													if($sponserId !=""){?>
 													<input type="hidden" name="sponser_id" value="<?php echo $sponserId;?>">
 												<?php }else{?>
 														Invalid Affilate Link
 												<?php } ?>
-													<input type="text" id="name" name="name" value="<?php echo set_value('name'); ?>" placeholder="Enter User Name" class="form-control" />
-													<span class="required_star">*</span>
-												</div>
-											</div>
-											 <div class="col-sm-12">
-												<div class="form-group">
-													<input type="text" id="email" name="email" value="<?php echo set_value('email'); ?>" placeholder="Enter Email" class="form-control" />
-													<span class="required_star">*</span>
-												</div>
-											</div> 
-											<div class="col-sm-12">
-												<div class="form-group">
-												<input type="tel" id="contact" name="contact" value="<?php echo set_value('contact'); ?>" placeholder="e.g. +65 2123 4567" class="form-control" />
-												</div>
-											</div>
-											<input type="hidden" name="role" value="Subscriber">
-											<div class="clearfix form-actions">
-												<div class="col-md-12">
-													<input type="submit" name="signupSubmit" class="btn btn-youtube btn-lg btn-rounded" value="Submit"  style="width:100%">
-													
-												</div>
-											</div>
+                                        <div class="form-group ">
+                                            <div class="col-xs-12">
+                                                <input id="name" class="form-control" type="text" name="name" required="" placeholder="Enter Name" value="<?php echo set_value('name'); ?>" >
+                                            </div>
+                                        </div>
 
-										<div class="clearfix"></div>
-											<p class="already_account">Already have an account?<a href="<?= base_url() ?>login"> Sign In</a></p>
-											
-										</div>
-										
-										</form>
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                                <input type="text" class="form-control" id="email" name="email" value="<?php echo set_value('email'); ?>" placeholder="Enter Email" class="form-control" required/>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="role" value="Subscriber">
+                                        <div class="form-group">
+                                            <div class="col-xs-12">
+                                               <input type="tel" class="form-control" id="contact" name="contact" value="<?php echo set_value('contact'); ?>" placeholder="e.g. +65 2123 4567" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group text-center m-t-30">
+                                            <div class="col-sm-12">
+                                             </div>
+                                        </div>
+
+                                        <div class="form-group account-btn text-center m-t-10">
+                                            <div class="col-xs-12">
+                                            	   <button type="submit" class="btn w-md btn-bordered btn-danger waves-effect waves-light" name="signupSubmit" value="Log In">Register</button>
+                                          
+                                            </div>
+                                        </div>
+
+                                    </form>
 
                                     <div class="clearfix"></div>
 
                                 </div>
-								<div class="col-sm-6 col right_register" style="padding:0px;"></div>
-								<div class="col-sm-1 col"></div>
-								<div class="clearfix"></div>
+                               
                             </div>
                             <!-- end card-box-->
                         </div>
@@ -142,10 +130,7 @@
                 </div>
             </div>
           </section>
-            	 <script>
-            var resizefunc = [];
-        </script>
-		<style>
+          <style>
 		.alert{
 			width: 100%;
     display: table;
@@ -231,7 +216,6 @@
 		.form-control{color:#ccc}
 		select
 		</style>
-	    <!-- jQuery  -->
         <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
 		<script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
         <script src="<?= base_url(); ?>components/jquery-validation/dist/jquery.validate.js"></script>

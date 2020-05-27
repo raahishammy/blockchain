@@ -44,7 +44,7 @@
                         <div class="row">
 							<div class="col-xs-12">
 								<div class="page-title-box">
-									<h4 class="page-title">Referral Link</h4>
+									<h4 class="page-title">Refer Freind</h4>
 									<ol class="breadcrumb p-0 m-0">
 										<li>
 											<i class="fa fa-home home-icon"></i>
@@ -55,40 +55,80 @@
 										  <a href="<?php echo site_url();?>dashboard">Dashboard</a>
 										</li>
 										<li class="active">
-											Refer Friends & Earn Credit
+											Referral Link
 										</li>
 									</ol>
 									<div class="clearfix"></div>
 								</div>
 							</div>
 						</div>
-                      
-					<div class="row">
-						<div class="col-md-12">
-						
-						
-															<div class="alert alert-info">
-																<button type="button" class="close" data-dismiss="alert">
-																</button>
-																Refer Freind and Earn Credit
-																<br />
-															</div>
-														
-						
-						   </div>
-							
-						<div class="col-md-12">
-							Share my referral link with freinds</br>
-						<?php echo site_url();?>referral/<?php echo md5($user['id']);?>
-						</div>
-						
-                           
-                        </div>
-						  </div> <!-- container -->
-				 </div> <!-- content -->
+            <div class="row">
 
-                <!-- Footer -->
+             <div class="panel panel-primary">
+      <div class="panel-heading"><h1 style="color:white;">Refer Freind and Earn Credit</h1></br>
+      <h5 style="color:white;">Share my referral link with freinds</h5></div>
+      <div class="panel-body">
+      	<div class="col-md-12">
+				<div class="form-group">
+						<div class="col-xs-9">
+							<?php $reflink = site_url().'referral/'. md5($user['id']);?>
+							<input type="text" class="form-control"  value="<?php echo $reflink?>" id="myInput" required readonly>
+						</div>
+						<div class="col-xs-3">
+							<button onclick="myFunction()" class="btn w-md btn-bordered btn-warning waves-effect waves-light">Copy Link</button>
+						</div>
+					</div>
+					</div>
+
+      </div>
+    </div>
+
+				
+				</br>
+			<div class="col-md-12">
+					<div class="form-group">
+						<div class="col-xs-12">
+							<!---<div class="fb-share-button" 
+							    data-href="<?php //echo $reflink;?>" 
+							    data-layout="button_count">
+							 </div>-->
+							  <a href="http://www.facebook.com/sharer.php?u=<?php echo $reflink;?>" target="_blank">
+						        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+						    </a>
+							 <a href="https://twitter.com/share?url=<?php echo $reflink;?>" target="_blank">
+        					<img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+   								</a>
+   								<a href="http://www.linkedin.com/shareArticle?mini=true&amp;url=<?php echo $reflink;?>" target="_blank">
+							        <img src="https://simplesharebuttons.com/images/somacro/linkedin.png" alt="LinkedIn" />
+							    </a>
+							    <a href="mailto:?Subject=Referral Link&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20<?php echo $reflink;?>">
+							        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+							    </a>
+						</div>
+				</div>
+			</div>
+				
+			</div>
 			<?php $this->load->view('admin/layouts/footer') ?>
+			<script>
+			function myFunction() {
+				  var copyText = document.getElementById("myInput");
+				  copyText.select();
+				  copyText.setSelectionRange(0, 99999)
+				  document.execCommand("copy");
+				  //alert("Copied Link: " + copyText.value);
+			}
+			</script>
+			 <div id="fb-root"></div>
+		  <script>
+		  	(function(d, s, id) {
+		    var js, fjs = d.getElementsByTagName(s)[0];
+		    if (d.getElementById(id)) return;
+		    js = d.createElement(s); js.id = id;
+		    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+		    fjs.parentNode.insertBefore(js, fjs);
+		  }(document, 'script', 'facebook-jssdk'));
+		</script>
 			 </div>
 		 </div>
    </body>

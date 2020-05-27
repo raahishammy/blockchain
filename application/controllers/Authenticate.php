@@ -102,8 +102,8 @@ class Authenticate extends CI_Controller {
 
      public function affilate_load()
      {
-      if(!$this->isUserLoggedIn)
-      {
+      $user = $this->session->all_userdata();
+       if(empty($user['id'])){
       $id = $this->uri->segment(2);
         $data = $this->user->get_user_by_encrypted_id($id);
         if($data){
@@ -117,10 +117,13 @@ class Authenticate extends CI_Controller {
         }else{
             echo "Not a valid referral link.";
         }
+      }else{
+        redirect('logout');
       }
      }
 
-     public function affilate_register(){
+     public function affilate_register()
+     {
        $data = $userData = array(); 
         if($this->input->post('signupSubmit') && $this->input->post('sponser_id') !=""){ 
             $this->form_validation->set_rules('name', 'Name', 'required'); 
