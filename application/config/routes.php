@@ -63,10 +63,12 @@ $route['referral/(:any)'] = 'authenticate/affilate_load';
 $route['dashboard'] = 'authenticate/dashboard_view';
 $route['logout'] = 'authenticate/logout';
 
+
 /************Admin Layouts****************/
 $route['profile'] = 'admin/home/profile';
 $route['profile/update'] = 'admin/home/profile_update';
 $route['change_password'] = 'admin/home/change_password';
+$route['update/password'] = 'admin/home/update_password';
 
 $route['referral'] = 'admin/referral/load_referral';
 

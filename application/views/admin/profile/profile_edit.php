@@ -49,10 +49,6 @@
 									<h4 class="page-title">Edit Account</h4>
 									<ol class="breadcrumb p-0 m-0">
 										<li>
-											<i class="fa fa-home home-icon"></i>
-										  <a href="<?php echo base_url();?>">Home</a>
-										</li>
-										<li>
                                             <i class="fa fa-dashboard dashboard-icon"></i>
                                           <a href="<?php echo site_url();?>dashboard">Dashboard</a>
                                         </li>
@@ -158,6 +154,8 @@
 					</div> <!-- container -->
 				 </div> <!-- content -->
 	<?php $this->load->view('admin/layouts/footer') ?>
+     <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
+        <script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
  </div>
  </div>
   </body>

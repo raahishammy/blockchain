@@ -1,19 +1,7 @@
-<!-- Top Bar Start -->
-	<div class="topbar">
-
-		<!-- LOGO -->
-		<div class="topbar-left">
-			<!--<a href="<?= site_url('home'); ?>" class="logo"><span>LIMOUSINE <br/><span>Booking System</span></span><i class="mdi mdi-cube"></i></a> -->
+<div class="topbar">
+	<div class="topbar-left">
 			<span><img src="<?= base_url(); ?>assets/images/logo.png" alt="" height="70"></span>
-			<!-- Image logo -->
-			<!--<a href="index.html" class="logo">-->
-				<!--<span>-->
-					<!--<img src="<?= base_url(); ?>assets/zicros/images/logo.png" alt="" height="30">-->
-				<!--</span>-->
-				<!--<i>-->
-					<!--<img src="<?= base_url(); ?>assets/zicros/images/logo_sm.png" alt="" height="28">-->
-				<!--</i>-->
-			<!--</a>-->
+			
 		</div>
 
 		<!-- Button mobile view to collapse sidebar menu -->
@@ -45,33 +33,17 @@
 							<li><a href="<?= site_url();?>logout"><i class="ti-power-off m-r-5"></i> Logout</a></li>
 						</ul>
 					</li>
-
-				</ul> <!-- end navbar-right -->
-
-			</div><!-- end container -->
-		</div><!-- end navbar -->
+					</ul> <!-- end navbar-right -->
+			</div>
+		</div>
 	</div>
-	<!-- Top Bar End -->
-
-<!-- ========== Left Sidebar Start ========== -->
+	
 <div class="left side-menu">
     <div class="sidebar-inner slimscrollleft">
-
-        <!--- Sidemenu -->
-        <div id="sidebar-menu">
-            <!-- Navigation  -->
+	<div id="sidebar-menu">
             <?php echo $nav; ?>
         </div>
-        <!-- Sidebar -->
         <div class="clearfix"></div>
-		<?php /* 
-        <div class="help-box">
-            <h5 class="text-muted m-t-0">For Help ?</h5>
-            <p class="m-b-0"><span class="text-custom"><b>Email:</b></span> <br/> contact@zencloud.com.sg </p>
-            <p class="m-b-0"><span class="text-custom"><b>Call:</b></span> <br/> (+65) 6653 7904</p>
-        </div>
-		*/ ?>
-    </div>
-    <!-- Sidebar -left -->
+	</div>
 </div>
-<!-- Left Sidebar End -->
+

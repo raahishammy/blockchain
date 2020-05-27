@@ -47,11 +47,7 @@
 								<div class="page-title-box">
 									<h4 class="page-title">Dashboard</h4>
 									<ol class="breadcrumb p-0 m-0">
-										<li>
-											<i class="fa fa-home home-icon"></i>
-										  <a href="<?php echo site_url();?>">Home</a>
-										</li>
-										<li class="active">
+									<li class="active">
 											Dashboard
 										</li>
 									</ol>
@@ -92,6 +88,8 @@
                      </div> <!-- container -->
                   </div> <!-- content -->
             <?php $this->load->view('admin/layouts/footer') ?>
+             <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
+        <script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
           </div>
          </div>
      </body>
