@@ -148,7 +148,7 @@ class Authenticate extends CI_Controller {
                     $subject = "Referal Link";
                     $referallink  = site_url().'referral/'.$referalId;
                     $message = "<html><body><span>Hello ".strip_tags($this->input->post('name')). ",</br>
-                    Welcome to Blockhain and congratulations on becoming a  member</br>
+                    Welcome to Blockhain and congratulations on becoming a  member.</br>
                     Referral link:  " . $referallink . "</br>
                     Email Address:  " . strip_tags($this->input->post('email')) . "</br>
                     Password: " . $pswd . "</br>
@@ -180,6 +180,7 @@ class Authenticate extends CI_Controller {
         $to = $to;
         $subject = $subject;
         $message = $message;
+
         $this->email->set_newline("\r\n");
         $this->email->from($from);
         $this->email->to($to);
