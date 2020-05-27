@@ -89,6 +89,16 @@ class User extends CI_Model{
     if($query->num_rows() > 0)
         return $query->result();
     }
+ 
+    public function get_user_by_encrypted_id($id)
+    {
+    $this->db->select('*');
+    $this->db->from($this->table);
+    $this->db->where('md5(id)', $id);  // Also mention table name here
+    $query = $this->db->get();    
+    if($query->num_rows() > 0)
+        return $query->result();
+    }
 
     public function update_referal($id, $referalId) 
     {

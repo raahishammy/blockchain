@@ -54,19 +54,12 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 /*************Frontend Layouts**********/
-//$route['default_controller'] = 'authenticate/index_get';
-//$this->set_directory( "frontend" );
 $route['default_controller'] = 'authenticate/index';
 $route['login'] = 'authenticate/index';
 $route['referral/(:any)'] = 'authenticate/affilate_load';
-$route['affilate/sponser'] = 'authenticate/affilate_register';
-
-
-$route['register'] = 'authenticate/register_view';
 /********************Front end***************/
 
-
-
+/************Admin Layouts****************/
 $route['dashboard'] = 'authenticate/dashboard_view';
 $route['logout'] = 'authenticate/logout';
 
@@ -78,6 +71,6 @@ $route['change_password'] = 'admin/home/change_password';
 
 
 $route['referral/update/(:any)'] = 'admin/referral/referral_update';
-$route['view/referral'] = 'admin/referral/load_referral';
+$route['referral'] = 'admin/referral/load_referral';
 
 /************End admin layouts************/

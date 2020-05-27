@@ -103,19 +103,17 @@ class Authenticate extends CI_Controller {
      public function affilate_load()
      {
         $id = $this->uri->segment(2);
-        $referalId = base64_decode($id);
-        $data = $this->user->get_user($referalId);
-        if($data)
-        {
-        $cookie= array(
-          'name'   => 'sponser_id',
-          'value'  => $referalId,
-          'expire' => '3600'
-        );
-        $this->input->set_cookie($cookie);
-        $this->load->view('admin/register');
+        $data = $this->user->get_user_by_encrypted_id($id);
+        if($data){
+            $cookie= array(
+                'name'   => 'sponser_id',
+                'value'  => $referalId,
+                'expire' => '3600'
+            );
+            $this->input->set_cookie($cookie);
+            $this->load->view('admin/register');
         }else{
-          echo "Not a valid referral link.";
+            echo "Not a valid referral link.";
         }
      }
 
@@ -172,19 +170,16 @@ class Authenticate extends CI_Controller {
     public function send_message($subject, $message, $to) {
         $this->load->config('email');
         $this->load->library('email');
-        
         $from = $this->config->item('smtp_user');
         $to = $to;
         $subject = $subject;
         $message = $message;
-
         $this->email->set_newline("\r\n");
         $this->email->from($from);
         $this->email->to($to);
         $this->email->subject($subject);
         $this->email->message($message);
-
-        if ($this->email->send()) {
+       if ($this->email->send()) {
             echo 'Your Email has successfully been sent.';
         } else {
             show_error($this->email->print_debugger());
