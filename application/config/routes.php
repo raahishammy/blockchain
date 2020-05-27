@@ -56,7 +56,8 @@ $route['translate_uri_dashes'] = FALSE;
 /*************Frontend Layouts**********/
 //$route['default_controller'] = 'authenticate/index_get';
 //$this->set_directory( "frontend" );
-$route['default_controller'] = 'frontend/homepage/index';
+// $route['default_controller'] = 'frontend/homepage/index';
+$route['default_controller'] = 'authenticate/index';
 $route['login'] = 'authenticate/index';
 $route['referral/(:any)'] = 'authenticate/affilate_load';
 $route['affilate/sponser'] = 'authenticate/affilate_register';
