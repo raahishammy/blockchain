@@ -66,11 +66,8 @@ $route['logout'] = 'authenticate/logout';
 /************Admin Layouts****************/
 $route['profile'] = 'admin/home/profile';
 $route['profile/update'] = 'admin/home/profile_update';
-
 $route['change_password'] = 'admin/home/change_password';
 
-
-$route['referral/update/(:any)'] = 'admin/referral/referral_update';
 $route['referral'] = 'admin/referral/load_referral';
 
 /************End admin layouts************/

@@ -100,17 +100,6 @@ class User extends CI_Model{
         return $query->result();
     }
 
-    public function update_referal($id, $referalId) 
-    {
-         $data = [
-            'referral_id' => $referalId
-        ];
-        $this->db->where('id', $id);
-        $this->db->update($this->table, $data);
-        echo 'Referal has successfully been updated';
-  }
-
-
     public function update_profile_info($id, $data) 
     {
         $this->db->where('id', $id);

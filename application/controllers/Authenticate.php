@@ -102,12 +102,14 @@ class Authenticate extends CI_Controller {
 
      public function affilate_load()
      {
-        $id = $this->uri->segment(2);
+      if(!$this->isUserLoggedIn)
+      {
+      $id = $this->uri->segment(2);
         $data = $this->user->get_user_by_encrypted_id($id);
         if($data){
             $cookie= array(
                 'name'   => 'sponser_id',
-                'value'  => $referalId,
+                'value'  => $data[0]->id,
                 'expire' => '3600'
             );
             $this->input->set_cookie($cookie);
@@ -115,6 +117,7 @@ class Authenticate extends CI_Controller {
         }else{
             echo "Not a valid referral link.";
         }
+      }
      }
 
      public function affilate_register(){
@@ -122,31 +125,31 @@ class Authenticate extends CI_Controller {
         if($this->input->post('signupSubmit') && $this->input->post('sponser_id') !=""){ 
             $this->form_validation->set_rules('name', 'Name', 'required'); 
             $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback_email_check'); 
-            $this->form_validation->set_rules('password', 'password', 'required'); 
             $this->form_validation->set_rules('contact', 'contact', 'required'); 
             $this->form_validation->set_rules('role', 'role', 'required'); 
-            $this->form_validation->set_rules('country', 'country', 'required'); 
-            $c_date =date("Y-m-d H:i:s");
+             $c_date =date("Y-m-d H:i:s");
+            $pswd = $this->generateRandomString(8);
             $userData = array( 
                 'parent_id' => $this->input->post('sponser_id'),
                 'name' => strip_tags($this->input->post('name')), 
                 'email' => strip_tags($this->input->post('email')), 
-                'password' => md5($this->input->post('password')), 
+                'password' => md5($pswd), 
                 'contact' => strip_tags($this->input->post('contact')), 
-                'role' => $this->input->post('role'),
-                'country_code' => $this->input->post('country')
+                'role' => $this->input->post('role')
             ); 
             if($this->form_validation->run() == true){ 
                 $insert = $this->user->insert($userData); 
                 if($insert){ 
                     $insert_id = $this->db->insert_id();
-                    $referalId = rtrim(strtr(base64_encode($insert_id), '+/', '-_'), '=');
-                    $this->user->update_referal($insert_id, $referalId);
+                    $referalId = md5($insert_id);
                     $subject = "Referal Link";
                     $referallink  = site_url().'referral/'.$referalId;
-                    $message="<html><body><span>Hello ".strip_tags($this->input->post('name')). ",</br>
+                    $message = "<html><body><span>Hello ".strip_tags($this->input->post('name')). ",</br>
                     Welcome to Blockhain and congratulations on becoming a  member</br>
-                    Referral link:  " . $referallink . "</br></span></body></html>";
+                    Referral link:  " . $referallink . "</br>
+                    Email Address:  " . strip_tags($this->input->post('email')) . "</br>
+                    Password: " . $pswd . "</br>
+                    </span></body></html>";
                     $to = $this->input->post('email');
                     $this->send_message($subject, $message, $to);
                     $this->session->set_flashdata('success', 'Your account registration has been successful. Please login to your account.');
@@ -184,5 +187,16 @@ class Authenticate extends CI_Controller {
         } else {
             show_error($this->email->print_debugger());
         }
+    }
+
+    // Genrate random string for password and email code
+    public function generateRandomString($length) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 }

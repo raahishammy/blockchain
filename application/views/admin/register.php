@@ -109,22 +109,10 @@
 											</div> 
 											<div class="col-sm-12">
 												<div class="form-group">
-													<input type="password" id="password" name="password" value="<?php echo set_value('password'); ?>" placeholder="Enter Password" class="form-control" />
-													<span class="required_star">*</span>
-												</div>
-											</div> 
-											<div class="col-sm-12">
-												<div class="form-group">
 												<input type="tel" id="contact" name="contact" value="<?php echo set_value('contact'); ?>" placeholder="e.g. +65 2123 4567" class="form-control" />
 												</div>
 											</div>
 											<input type="hidden" name="role" value="Subscriber">
-											
-											<div class="col-sm-12">
-												<div class="form-group">
-												<select class="form-control bfh-countries" data-country="US" id="countryId" name="country" required></select>
-												</div>
-											</div>
 											<div class="clearfix form-actions">
 												<div class="col-md-12">
 													<input type="submit" name="signupSubmit" class="btn btn-youtube btn-lg btn-rounded" value="Submit"  style="width:100%">
@@ -245,59 +233,12 @@
 		</style>
 	    <!-- jQuery  -->
         <script src="<?= base_url(); ?>assets/zicros/js/jquery.min.js"></script>
-		
-        <script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/detect.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/fastclick.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.blockUI.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/waves.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.slimscroll.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.scrollTo.min.js"></script>
-
-		<script src="<?= base_url(); ?>components/jquery-validation/dist/jquery.validate.js"></script>
-		<script src="<?= base_url(); ?>assets/js/eldarion-ajax.min.js"></script>
-        <!-- App js -->
+		<script src="<?= base_url(); ?>assets/zicros/js/bootstrap.min.js"></script>
+        <script src="<?= base_url(); ?>components/jquery-validation/dist/jquery.validate.js"></script>
 		<script src="<?= base_url(); ?>components/typeahead.js/dist/typeahead.jquery.js"></script>
-
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.core.js"></script>
-        <script src="<?= base_url(); ?>assets/zicros/js/jquery.app.js"></script>
 		<script src="<?= base_url(); ?>assets/js/intlTelInput.min.js"></script>
-		<script src="<?= base_url(); ?>components/autosize/dist/autosize.js"></script>
 		<script src="<?= base_url(); ?>components/jquery-inputlimiter/jquery.inputlimiter.js"></script>
 		<script src="<?= base_url(); ?>assets/zicros/js/bootstrap-formhelpers.min.js"></script>
-	
-	 
-    <script>
-    </script>
-
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
-		$(function() {
-			$(document).on("eldarion-ajax:begin", function(evt, $el) {
-			  // $el.html("Processing...");
-			});
-
-			$(document).on("eldarion-ajax:success", function(evt, $el, data, textStatus, jqXHR) {
-				// console.log(evt);
-				// console.log(data);
-				// console.log(jqXHR);
-
-			});
-
-			$(document).on("eldarion-ajax:error", function(evt, $el, data, textStatus, jqXHR) {
-				// console.log(evt);
-				// console.log(data);
-				// console.log(jqXHR);
-			});
-			$(document).on('click', 'a[data-target]', function(e) {
-				e.preventDefault();
-				var target = $(this).data('target');
-				$('.account-content').addClass('hidden');//hide others
-				$(target).removeClass('hidden');//show target
-			});
-		});
-
-		</script>
 		<script type="text/javascript">
 		$('#edit-form').validate({
 			errorElement: 'div',
@@ -311,9 +252,6 @@
 				email: {
 					required: true,
 					email: true
-				},
-				country: {
-					required: true
 				},
 				contact: {
 					required: true
@@ -372,41 +310,9 @@
 		     // separateDialCode: true,
 		     utilsScript: "<?= base_url(); ?>assets/js/utils.js"
 		  });
-
-			autosize($('textarea[class*=autosize]'));
-
-			$('textarea.limited').inputlimiter({
-				remText: '%n character%s remaining...',
-				limitText: 'max allowed : %n.'
-			});
-
-			//typeahead.js
-			//example taken from plugin's page at: https://twitter.github.io/typeahead.js/examples/
-			var substringMatcher = function(strs) {
-				return function findMatches(q, cb) {
-					var matches, substringRegex;
-
-					// an array that will be populated with substring matches
-					matches = [];
-
-					// regex used to determine if a string contains the substring `q`
-					substrRegex = new RegExp(q, 'i');
-
-					// iterate through the pool of strings and for any string that
-					// contains the substring `q`, add it to the `matches` array
-					$.each(strs, function(i, str) {
-						if (substrRegex.test(str.name)) {
-							// the typeahead jQuery plugin expects suggestions to a
-							// JavaScript object, refer to typeahead docs for more info
-							matches.push({ value: str.name });
-						}
-					});
-
-					cb(matches);
-				}
-			}
-			
 		});
+
+			
 
 		</script>
     </body>
