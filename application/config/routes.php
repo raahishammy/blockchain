@@ -56,25 +56,26 @@ $route['translate_uri_dashes'] = FALSE;
 /*************Frontend Layouts**********/
 //$route['default_controller'] = 'authenticate/index_get';
 //$this->set_directory( "frontend" );
-// $route['default_controller'] = 'frontend/homepage/index';
 $route['default_controller'] = 'authenticate/index';
 $route['login'] = 'authenticate/index';
 $route['referral/(:any)'] = 'authenticate/affilate_load';
-//$route['referral/sponser'] = 'authenticate/affilate_register';
-//$route['register'] = 'authenticate/register_view';
+$route['affilate/sponser'] = 'authenticate/affilate_register';
+
+
+$route['register'] = 'authenticate/register_view';
 /********************Front end***************/
 
 
 
-/************Admin Layouts****************/
 $route['dashboard'] = 'authenticate/dashboard_view';
 $route['logout'] = 'authenticate/logout';
 
+/************Admin Layouts****************/
 $route['profile'] = 'admin/home/profile';
 $route['profile/update'] = 'admin/home/profile_update';
 
 $route['change_password'] = 'admin/home/change_password';
-$route['update/password'] = 'admin/home/update_password';
+
 
 $route['referral/update/(:any)'] = 'admin/referral/referral_update';
 $route['view/referral'] = 'admin/referral/load_referral';
